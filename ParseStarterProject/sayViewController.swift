@@ -22,6 +22,7 @@ class sayViewController: UIViewController {
     
     @IBAction func submitAction(sender: AnyObject) {
      var obj = PFObject(className: "Events")
+        println(obj)
      obj["content"] = content.text
      obj["user"] = PFUser.currentUser()!
      obj.saveInBackgroundWithBlock {
