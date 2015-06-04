@@ -12,26 +12,55 @@ import Parse
 
 class settingViewController: UIViewController,UIActionSheetDelegate,UIImagePickerControllerDelegate {
     
+    var user: PFUser!
+    @IBOutlet weak var block3: UIView!
     @IBOutlet weak var profile: UIImageView!
     @IBOutlet weak var img: UIButton!
+    @IBOutlet weak var block1: UIView!
+    @IBOutlet weak var username: UILabel!
+    @IBOutlet weak var position: UILabel!
+    @IBOutlet weak var block2: UIView!
+    @IBOutlet weak var block4: UIButton!
+    @IBOutlet weak var editBlock1: UIButton!
+    @IBOutlet weak var editBlock2: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         println("yea")
-        image();
+        block1.layer.cornerRadius = 5;
+        block2.layer.cornerRadius = 5;
+        block3.layer.cornerRadius = 5;
+        block4.layer.cornerRadius = 5;
         // Do any additional setup after loading the view, typically from a nib.
     }
-    
+    override func viewWillAppear(animated: Bool) {
+        if PFUser.currentUser()!.username == user.username {
+            self.img.hidden = false;
+            self.editBlock1.hidden = false;
+            self.editBlock2.hidden = false;
+        }else{
+            self.img.hidden = true;
+            self.editBlock1.hidden = true;
+            self.editBlock2.hidden = true;
+        }
+        image();
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     func image(){
-        profile.layer.cornerRadius = 60;
-        profile.layer.borderColor = UIColor.whiteColor().CGColor
+        self.username.text = user.username
+        if user["coach"] as! Bool == true {
+            self.position.text = "Coach"
+        }else{
+            self.position.text = "Player"
+        }
+        profile.layer.cornerRadius = 35;
+        profile.layer.borderColor = UIColor.clearColor().CGColor
         profile.layer.borderWidth = 2;
         self.profile.clipsToBounds = true;
-        var file: PFFile = PFUser.currentUser()!["picture"] as! PFFile;
+        var file: PFFile = user["picture"] as! PFFile;
         file.getDataInBackgroundWithBlock {
             (imageData: NSData?,error : NSError?) -> Void in
             if let imageData = imageData{
@@ -59,7 +88,6 @@ class settingViewController: UIViewController,UIActionSheetDelegate,UIImagePicke
         self.profile.image = image;
         var file = PFFile(name: "picture.jpeg", data: UIImageJPEGRepresentation(image, 0.6));
         PFUser.currentUser()!["picture"] = file;
-        PFUser.currentUser()!["first"] = false;
         PFUser.currentUser()!.saveInBackgroundWithBlock {
             (succeeded: Bool, error: NSError?) -> Void in
             ProgressHUD.showSuccess(nil)

@@ -35,12 +35,13 @@ class codeViewController: UIViewController {
                 ProgressHUD.showError("Code invalid!", interaction: false)
             } else {
                 // The find succeeded.
-                println("Successfully retrieved the object.")
+                println("Successfully retrieved the code object.")
                 if let object = object {
                     if object["used"] as! Bool == true {
                         ProgressHUD.showError("Code already used!", interaction: false)
                     }else{
                         if self.code.text == "mueller" {
+                            println("HRESERFESr")
                             self.code_object = object;
                             self.performSegueWithIdentifier("picture", sender: self)
                         }else{
@@ -63,7 +64,7 @@ class codeViewController: UIViewController {
         }
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "tochat" {
+        if segue.identifier == "picture" {
             let vc:pictureViewController = segue.destinationViewController as! pictureViewController
             vc.code = self.code_object
         }

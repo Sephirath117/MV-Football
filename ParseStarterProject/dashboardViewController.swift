@@ -29,7 +29,7 @@ class dashboardViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     func image(){
-        profile.layer.cornerRadius = 50;
+        profile.layer.cornerRadius = 25;
         profile.layer.borderColor = UIColor.whiteColor().CGColor
         profile.layer.borderWidth = 2;
         self.profile.clipsToBounds = true;

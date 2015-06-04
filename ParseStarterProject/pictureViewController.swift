@@ -79,9 +79,12 @@ class pictureViewController: UIViewController,UIActionSheetDelegate,UIImagePicke
     }
     @IBAction func doneLogic(sender: AnyObject) {
         if code["coach"] as! Bool == true {
+            PFUser.currentUser()!["coach"] = true;
             PFUser.currentUser()!["name"] = self.nameChange.text;
+            PFUser.currentUser()!["role"] = code["role"] as! String;
             self.performSegueWithIdentifier("dash", sender: self)
         }else{
+            PFUser.currentUser()!["coach"] = false;
             PFUser.currentUser()!["name"] = self.nameChange.text;
             PFUser.currentUser()!["role"] = self.positiontext.text;
             if let myNumber = NSNumberFormatter().numberFromString(self.numtext.text) {
