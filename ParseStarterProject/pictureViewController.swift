@@ -39,19 +39,20 @@ class pictureViewController: UIViewController,UIActionSheetDelegate,UIImagePicke
     }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
-        var r = code["role"] as! String
+        var r = code["role"] as String
         self.role.text = "You're a \(r)"
-        name = code["Name"] as! String
+        name = code["Name"] as String
         self.nameChange.text = name
-        if code["coach"] as! Bool == true {
+        if code["coach"] as Bool == true {
             self.num.hidden = true;
             self.numtext.hidden = true;
             self.position.hidden = true;
             self.positiontext.hidden = true;
-        }else{
-            number = code["number"] as! Int
+        }
+        else{
+            number = code["number"] as Int
             self.numtext.text = "\(number)"
-            positions = code["position"] as! String
+            positions = code["position"] as String
             self.positiontext.text = positions
         }
     }
