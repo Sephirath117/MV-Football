@@ -65,7 +65,7 @@ class codeViewController: UIViewController {
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "picture" {
-            let vc:pictureViewController = segue.destinationViewController as! pictureViewController
+            let vc:pictureViewController = segue.destinationViewController as pictureViewController
             vc.code = self.code_object
         }
     }

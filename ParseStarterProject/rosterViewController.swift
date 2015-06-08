@@ -35,8 +35,8 @@ class rosterViewController: UIViewController, UICollectionViewDataSource, UIColl
                 // The find succeeded.
                 println("Successfully retrieved \(objects!.count) scores.")
                 // Do something with the found objects
-                if let objects = objects as? AnyObject {
-                    self.arr = objects as! NSArray
+                if let objects = objects as AnyObject? {
+                    self.arr = objects as NSArray
                     println("HERSEfseFdsfaekhjfasdfljkadsfhljadfs")
                 }
                 self.collectView.reloadData()
@@ -52,12 +52,12 @@ class rosterViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let user = arr[indexPath.item] as! PFObject
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! rosterViewCell
+        let user = arr[indexPath.item] as PFObject
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as rosterViewCell
         cell.layer.cornerRadius = 5;
         cell.profile.layer.cornerRadius = 35;
-        cell.name.text = user["username"] as! String
-        var file: PFFile = user["picture"] as! PFFile;
+        cell.name.text = user["username"] as String
+        var file: PFFile = user["picture"] as PFFile;
         file.getDataInBackgroundWithBlock {
             (imageData: NSData?,error : NSError?) -> Void in
             if let imageData = imageData{
@@ -70,7 +70,7 @@ class rosterViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        let user = arr[indexPath.item] as! PFUser
+        let user = arr[indexPath.item] as PFUser
         self.sendUser = user
         self.performSegueWithIdentifier("toProfile", sender: self)
 
@@ -87,7 +87,7 @@ class rosterViewController: UIViewController, UICollectionViewDataSource, UIColl
     }
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "toProfile" {
-            let vc:settingViewController = segue.destinationViewController as! settingViewController
+            let vc:settingViewController = segue.destinationViewController as settingViewController
             vc.user = self.sendUser
         }
     }

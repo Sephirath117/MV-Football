@@ -79,10 +79,10 @@ class pictureViewController: UIViewController,UIActionSheetDelegate,UIImagePicke
         // Dispose of any resources that can be recreated.
     }
     @IBAction func doneLogic(sender: AnyObject) {
-        if code["coach"] as! Bool == true {
+        if code["coach"] as Bool == true {
             PFUser.currentUser()!["coach"] = true;
             PFUser.currentUser()!["name"] = self.nameChange.text;
-            PFUser.currentUser()!["role"] = code["role"] as! String;
+            PFUser.currentUser()!["role"] = code["role"] as String;
             self.performSegueWithIdentifier("dash", sender: self)
         }else{
             PFUser.currentUser()!["coach"] = false;

@@ -51,16 +51,17 @@ class settingViewController: UIViewController,UIActionSheetDelegate,UIImagePicke
     }
     func image(){
         self.username.text = user.username
-        if user["coach"] as! Bool == true {
+        if user["coach"] as Bool == true {
             self.position.text = "Coach"
-        }else{
+        }
+        else{
             self.position.text = "Player"
         }
         profile.layer.cornerRadius = 35;
         profile.layer.borderColor = UIColor.clearColor().CGColor
         profile.layer.borderWidth = 2;
         self.profile.clipsToBounds = true;
-        var file: PFFile = user["picture"] as! PFFile;
+        var file: PFFile = user["picture"] as PFFile;
         file.getDataInBackgroundWithBlock {
             (imageData: NSData?,error : NSError?) -> Void in
             if let imageData = imageData{
