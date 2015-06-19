@@ -16,7 +16,7 @@ class dashboardViewController: UIViewController {
     @IBOutlet weak var profile: UIImageView!
     override func viewDidLoad() {
         self.username.text = PFUser.currentUser()!.username
-        self.position.text = PFUser.currentUser()!["role"] as String
+        self.position.text = PFUser.currentUser()!["role"] as! String
         super.viewDidLoad()
         println("yea")
         image();
@@ -33,7 +33,7 @@ class dashboardViewController: UIViewController {
         profile.layer.borderColor = UIColor.whiteColor().CGColor
         profile.layer.borderWidth = 2;
         self.profile.clipsToBounds = true;
-        var file: PFFile = PFUser.currentUser()!["picture"] as PFFile;
+        var file: PFFile = PFUser.currentUser()!["picture"] as! PFFile;
         file.getDataInBackgroundWithBlock {
             (imageData: NSData?,error : NSError?) -> Void in
             if let imageData = imageData {
